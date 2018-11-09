@@ -1,6 +1,7 @@
 #include <iostream>
 #include <conio.h>
 #include <string>
+#include <stdlib.h>
 using namespace std;
 struct Nodo{
 	char dato;
@@ -10,19 +11,18 @@ struct Nodo{
 void insertarNodo(char);
 void eliminarNodo(char);
 void mostrarNodos();
-void ordenarNodos();
 int main(int argc, char** argv) {
 	inicio=NULL;
 	int opcion;
 	char eliminarCaracter;
 	string expresion;
 	do{
+        system("cls");
 		cout<<"\n Menu "<<endl;
 		cout<<"1.- insertar expresion"<<endl;
 		cout<<"2.- eliminar caracter"<<endl;
 		cout<<"3.- Mostrar expresion"<<endl;
-		cout<<"4.- ordenar expresion"<<endl;
-		cout<<"5.- salir"<<endl;
+		cout<<"4.- salir"<<endl;
 		cin>>opcion;
 		switch (opcion){
         case 1:
@@ -30,11 +30,7 @@ int main(int argc, char** argv) {
             cin.ignore();
 			getline(cin, expresion);
 			for(int i=0; i<expresion.length(); i++){
-                if((expresion[i] == '(')||(expresion[i] == ')')){
-                    continue;
-                }else{
                     insertarNodo(expresion[i]);
-                }
 			}
 			break;
         case 2:
@@ -46,15 +42,13 @@ int main(int argc, char** argv) {
             mostrarNodos();
             break;
         case 4:
-            ordenarNodos();
-        case 5:
+            break;
+        default:
+            system("cls");
             break;
 		}//fin de switch
 
-	}while(opcion!=5);
-
-	mostrarNodos();
-
+	}while(opcion!=4);
 	cin.get();
 	return 0;
 }
@@ -104,31 +98,5 @@ void mostrarNodos(){
 		actual=actual->siguiente;
 	}
 	cout<<"\n";
-}
-void ordenarNodos(){
-	if(inicio!=NULL){
-		anterior=NULL;
-		aux=NULL;
-		actual=inicio;
-		while((actual->siguiente!=NULL) && (actual->dato < actual->siguiente->dato)){
-				anterior=actual;
-				actual=actual->siguiente;
-		}
-			if (actual->siguiente==NULL)
-			{
-				cout<<"\nordenamiento terminado\n";
-			}else if(anterior==NULL){
-				aux=actual;
-				actual=actual->siguiente;
-				inicio=actual;
-				aux->siguiente=actual->siguiente;
-				actual->siguiente=aux;
-			}else{
-				aux=actual;
-				actual=actual->siguiente;
-				anterior->siguiente=actual;
-				aux->siguiente=actual->siguiente;
-				actual->siguiente=aux;
-			}
-	}
+	system("pause");
 }
